@@ -30,8 +30,9 @@
               <el-menu-item index="2-4-3">选项3</el-menu-item>
             </el-submenu>
           </el-submenu>
-          <el-menu-item index="3" class="fr">消息中心</el-menu-item>
-          <el-menu-item index="4" class="fr"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+          <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+          <el-menu-item index="4" class="fr" @click="logout" >退出</el-menu-item>
+          <el-menu-item index="5" class="fr">消息中心</el-menu-item>
         </el-menu>
       </el-col>
     </el-row>
@@ -109,7 +110,14 @@
 
 <script>
 export default {
-
+  methods: {
+    logout() {
+      this.$confirm('确认退出吗？', '提示', {}).then(() => {
+        sessionStorage.removeItem('user');
+        this.$router.push('/login');
+      });
+    }
+  },
 }
 </script>
 

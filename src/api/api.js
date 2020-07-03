@@ -5,6 +5,16 @@ import axios from "axios";
 //后台地址和端口
 export let baseUrl = "http://localhost:8080/aomaomanage";
 
+//登录信息
+export function login(params) {
+  // alert(JSON.stringify(params));
+  return axios({
+    url: `${baseUrl}/admin/exists`,
+    method: "POST",
+    params: params
+  });
+}
+
 //获取商品类别列表ajax请求
 export function getCategoryList(params) {
   //写法1

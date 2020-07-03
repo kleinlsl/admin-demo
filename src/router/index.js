@@ -7,7 +7,7 @@ import User from '@/page/subPage/user'
 import Category from '@/page/subPage/category'
 import Type from '@/page/subPage/type'
 import ProductInfo from '@/page/subPage/productInfo'
-
+import Login from '@/page/login'
 
 
 Vue.use(Router);
@@ -57,6 +57,11 @@ export default new Router({
         },
 
       ]
+    },
+    {
+      path: '/login',
+      name: '登录',
+      component: Login
     }
   ]
 })

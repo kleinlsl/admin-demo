@@ -9,14 +9,14 @@
     <!--加入面包屑-->
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>商品类别管理</el-breadcrumb-item>
+      <el-breadcrumb-item>商品信息管理</el-breadcrumb-item>
     </el-breadcrumb>
     <br>
     <!--加入查询列-->
     <el-col :span="24" class="toolbar" style="padding-bottom: 0px;" >
       <el-form :inline="true" :model="filters">
         <el-form-item>
-          <el-input placeholder="类别名称" v-model="filters.typeName"></el-input>
+          <el-input placeholder="商品名称" v-model="filters.name"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="handleQuery">查询</el-button>
@@ -28,10 +28,17 @@
     </el-col>
     <!--数据列表-->
     <el-table :data="categoryData" stripe style="width: 100%">
-      <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="id" label="序号" width="180"></el-table-column>
-      <el-table-column prop="typeName" label="类别名称" width="180"></el-table-column>
-      <el-table-column label="操作" width="550">
+      <el-table-column type="selection" width="55"/>
+      <el-table-column prop="id" label="序号" width="60"/>
+      <el-table-column prop="code" label="商品编码" width="150"/>
+      <el-table-column prop="name" label="商品名称" width="150"/>
+      <el-table-column prop="typeInfo.name" label="商品类别" width="150"/>
+      <el-table-column prop="num" label="数量" width="80"/>
+      <el-table-column prop="price" label="单价" width="80"/>
+      <el-table-column prop="status" label="状态" width="80"/>
+      <el-table-column prop="deleteFlag" label="删除标识" width="80"/>
+      <el-table-column prop="createTime" label="创建时间" :formatter = "dateFormat" width="160"/>
+      <el-table-column label="操作" width="200">
         <template  slot-scope="scope">
           <el-button type="danger" size="small" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
           <el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
@@ -45,8 +52,8 @@
 
 
       <el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
-        <el-form-item label="图书类别名称" prop="typeName" >
-          <el-input v-model="addForm.typeName" auto-complete="off"></el-input>
+        <el-form-item label="图书类别名称" prop="name" >
+          <el-input v-model="addForm.name" auto-complete="off"></el-input>
         </el-form-item>
       </el-form>
 
@@ -59,8 +66,8 @@
     <!--修改编辑界面-->
     <el-dialog title="编辑" :visible.sync="editFormVisible" :close-on-click-modal="false">
       <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
-        <el-form-item label="图书类别名称" prop="typeName" >
-          <el-input v-model="editForm.typeName" auto-complete="off"></el-input>
+        <el-form-item label="图书类别名称" prop="name" >
+          <el-input v-model="editForm.name" auto-complete="off"></el-input>
         </el-form-item>
 
       </el-form>
@@ -74,7 +81,8 @@
 
 <script>
   // import axios from 'axios'
-  import {getCategoryList,addCategory,editCategory,removeCategory} from '../../api/api'
+  import moment from 'moment'
+  import {getList,add,edit,remove} from '../../api/productInfoApi'
   export default {
     data() {
       return {
@@ -84,21 +92,21 @@
         addFormVisible:false,
         editFormVisible:false,
         filters: {
-          typeName:''
+          name:''
         },
         //新增界面数据
         addForm: {
-          typeName: ''
+          name: ''
         },
 //校验信息
         addFormRules: {
-          typeName: [
+          name: [
             { required: true, message: '请输入图书类别', trigger: 'blur' }
           ]
         },
         editForm:{}, //编辑修改窗体
         editFormRules: {
-          typeName: [
+          name: [
             { required: true, message: '请输入图书类别', trigger: 'blur' }
           ]
         },
@@ -165,7 +173,7 @@
         this.addFormVisible=true;
         //初始化
         this.addForm = {
-          typeName: ''
+          name: ''
         };
       },
       handleQuery: function(){
@@ -184,14 +192,14 @@
           this.listLoading = true;
           //NProgress.start();
           let para = { id: row.id };
-          removeCategory(row.id).then((res) => {
+          remove(row.id).then((res) => {
             this.listLoading = false;
             //NProgress.done();
             this.$message({
               message: '删除成功',
               type: 'success'
             });
-            this.getUsers();
+            this.getData();
           });
         }).catch(() => {
 
@@ -202,16 +210,16 @@
         this.getData();
       },
       getData: function(){
-        //let params=this.filters.typeName;
+        // let params=this.filters.name;
         let para = {
           // page: this.page,
-          current:this.current,
-          size:this.size,
-          typeName: this.filters.typeName
+          page:this.current,
+          pageSize:this.size,
+          productName: this.filters.name
         };
-        //alert(JSON.stringify(params));
+        // alert(JSON.stringify(para));
         //发起ajax 使用axios模块发起请求
-        getCategoryList(para)
+        getList(para)
           // axios
           //   .get('http://localhost:8888/category/search',{params:para})
           .then(response => {
@@ -224,6 +232,16 @@
           .catch(function (error) { // 请求失败处理
             console.log(error);
           });
+      },
+      //时间格式化
+      dateFormat:function(row, column) {
+        // alert(1);
+        var date = row[column.property];
+        // alert(date);
+        if (date === undefined) {
+          return "";
+        }
+        return moment(date).format("YYYY-MM-DD HH:mm:ss");
       }
     },
     mounted(){
