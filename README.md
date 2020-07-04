@@ -1,6 +1,17 @@
 # admin-demo
 
-> A Vue.js project
+> Aomao后台管理系统-View层
+## clone
+``` bash
+# clone warehouse
+$ git clone https://gitee.com/kleinlsl/admin-demo.git
+```
+## Configuration
+``` bash
+# >cd src/api/
+# vi api.js
+# Modify baseUrl=#{Your server address}
+```
 
 ## Build Setup
 
