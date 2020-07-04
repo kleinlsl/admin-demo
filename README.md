@@ -1,6 +1,8 @@
 # admin-demo
 
-> Aomao后台管理系统-View层
+> AomaoManagementSystem-View
+>
+> Corresponding server warehouse address：[https://gitee.com/kleinlsl/aomaomanage](https://gitee.com/kleinlsl/aomaomanage)
 ## clone
 ``` bash
 # clone warehouse
