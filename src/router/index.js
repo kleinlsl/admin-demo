@@ -4,9 +4,12 @@ import HelloWorld from '@/components/HelloWorld'
 import Layout from '@/page/layout'
 import Main from '@/page/main'
 import User from '@/page/subPage/user'
-import Category from '@/page/subPage/category'
 import Type from '@/page/subPage/type'
 import ProductInfo from '@/page/subPage/productInfo'
+import UpdateAdminInfo from '@/page/subPage/updateAdminInfo'
+import userComment from '@/page/subPage/userComment'
+import orderDetail from '@/page/subPage/orderDetail'
+import orderInfo from '@/page/subPage/orderInfo'
 import Login from '@/page/login'
 
 
@@ -32,12 +35,6 @@ export default new Router({
           component:HelloWorld
         },
         {
-          //老师的模板
-          path: '/category',
-          name: 'categoryinfo',
-          component: Category
-        },
-        {
           // 会员管理
           path: '/user',
           name: 'User',
@@ -54,6 +51,30 @@ export default new Router({
           path: '/product',
           name: 'productInfo',
           component: ProductInfo
+        },
+        {
+        //  修改管理员信息
+          path: '/updateAdminInfo',
+          name: 'updateAdminInfo',
+          component: UpdateAdminInfo
+        },
+        {
+        //  用户留言页
+          path: '/userComment',
+          name: 'userComment',
+          component: userComment
+        },
+        {
+        //  订单明细页
+          path: '/orderDetail',
+          name: 'orderDetail',
+          component: orderDetail
+        },
+        {
+        //  订单明细页
+          path: '/orderInfo',
+          name: 'orderInfo',
+          component: orderInfo
         },
 
       ]

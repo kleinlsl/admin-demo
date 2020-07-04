@@ -28,6 +28,16 @@
       <p>Java版本: 1.8.0_161</p>
       <p>服务器: Tomcat 8.5</p>
       <p>数据库: Server version: 5.7.29-0ubuntu0.18.04.1 (Ubuntu)</p>
+      <hr/>
+      <hr/>
+      <h3 align="center">项目完成情况</h3>
+      <p>系&ensp;统&ensp;框&ensp;架&ensp;: &ensp;框架搭建完成，系统登录、退出完成</p>
+      <p>商品类别管理: &ensp;前端完成、后端完成</p>
+      <p>商品信息管理: &ensp;前端完成、后端完成</p>
+      <p>会员信息管理: &ensp;前端完成、后端完成</p>
+      <p>会员信息管理: &ensp;前端完成、后端完成</p>
+      <p>管&ensp;理&ensp;员模块: &ensp;前端登录、退出、修改密码完成、后端对应完成</p>
+      <p>其&ensp;他&ensp;模&ensp;块&ensp;: 后端已生成代码并部分测试</p>
     </div>
 <!--  </div>-->
 </template>

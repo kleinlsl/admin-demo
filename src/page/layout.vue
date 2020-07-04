@@ -19,20 +19,20 @@
         >
           <el-menu-item index="/">首页</el-menu-item>
           <el-submenu index="2">
-            <template slot="title">我的工作台</template>
-            <el-menu-item index="2-1">选项1</el-menu-item>
-            <el-menu-item index="2-2">选项2</el-menu-item>
-            <el-menu-item index="2-3">选项3</el-menu-item>
+            <template slot="title">订单管理</template>
+            <el-menu-item index="/orderInfo">订单信息管理</el-menu-item>
+<!--            <el-menu-item index="2-2">选项2</el-menu-item>-->
+<!--            <el-menu-item index="2-3">选项3</el-menu-item>-->
             <el-submenu index="2-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="2-4-1">选项1</el-menu-item>
-              <el-menu-item index="2-4-2">选项2</el-menu-item>
-              <el-menu-item index="2-4-3">选项3</el-menu-item>
+              <template slot="title">订单明细管理</template>
+              <el-menu-item index="/orderDetail">订单明细</el-menu-item>
+<!--              <el-menu-item index="2-4-2">选项2</el-menu-item>-->
+<!--              <el-menu-item index="2-4-3">选项3</el-menu-item>-->
             </el-submenu>
           </el-submenu>
-          <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+          <el-menu-item index="/user">会员管理</el-menu-item>
           <el-menu-item index="4" class="fr" @click="logout" >退出</el-menu-item>
-          <el-menu-item index="5" class="fr">消息中心</el-menu-item>
+          <el-menu-item index="/updateAdminInfo" class="fr">用户中心</el-menu-item>
         </el-menu>
       </el-col>
     </el-row>
@@ -74,28 +74,26 @@
             <span>会员管理模块</span>
           </template>
           <el-menu-item index="/user">会员信息管理</el-menu-item>
-          <el-menu-item index="2-2">会员留言管理</el-menu-item>
+          <el-menu-item index="/userComment">会员留言管理</el-menu-item>
         </el-submenu>
-
-        <el-menu-item index="3">
-          <i class="el-icon-document"></i>
-          <span slot="title">订单信息管理</span>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <i class="el-icon-setting"></i>
-          <span slot="title">系统用户设置</span>
-        </el-menu-item>
-        <el-submenu index="5">
+        <el-submenu index="3">
           <template slot="title">
             <i class="el-icon-document"></i>
-            <span>其他模块</span>
+            <span>订单管理模块</span>
           </template>
-          <el-menu-item index="/category">管理模板页</el-menu-item>
-<!--          <el-menu-item index="2-2">会员留言管理</el-menu-item>-->
+          <el-menu-item index="/orderInfo">订单信息管理</el-menu-item>
+          <el-menu-item index="/orderDetail">订单明细管理</el-menu-item>
         </el-submenu>
+
+<!--        <el-menu-item index="">-->
+<!--          <i class="el-icon-document"></i>-->
+<!--          <span slot="title">订单信息管理</span>-->
+<!--        </el-menu-item>-->
+        <el-menu-item index="/updateAdminInfo">
+          <i class="el-icon-setting"></i>
+          <span slot="title">个人中心</span>
+        </el-menu-item>
       </el-menu>
-
-
     </el-aside>
     <el-main>
       <!-- Main -->
@@ -103,7 +101,9 @@
     </el-main>
   </el-container>
   <el-footer>
-      Copyright @ 2020 XCUTeam. | repository：<a href="https://gitee.com/kleinlsl/aomaomanage" target="_blank">Gitee</a>
+      Copyright @ 2020 XCUTeam.
+    | repository：<a href="https://gitee.com/kleinlsl/aomaomanage" target="_blank">Gitee</a>
+    | Power by：<a href="https://element.faas.ele.me/#/zh-CN" target="_blank">element ui</a>
   </el-footer>
 </el-container>
 </template>

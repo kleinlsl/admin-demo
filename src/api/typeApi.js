@@ -45,3 +45,12 @@ export function removeType(params) {
     method: "DELETE"
   });
 }
+//selectById类别信息
+export function selectById(params) {
+  // alert(JSON.stringify(params));
+  return axios({
+    url: `${baseUrl}/type/selectById`,
+    method: "GET",
+    params:params
+  });
+}

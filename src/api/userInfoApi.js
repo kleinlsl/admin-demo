@@ -1,26 +1,26 @@
 /*
-商品信息API接口
+用户信息API接口
 */
 import axios from "axios";
 import {baseUrl} from "../api/api"
 
-//获取商品列表ajax请求
+//获取用户列表ajax请求
 export function getList(params) {
-  // alert(baseUrl);
-  // let url=`${baseUrl}/product/searchType`
+  // alert(JSON.stringify(params));
+  // let url=`${baseUrl}/user/searchType`
   // alert(url);
   return axios({
-    url: `${baseUrl}/product/searchProductInfo`,
+    url: `${baseUrl}/user/selectUser`,
     method: "GET",
     params: params
   });
 }
 
-//添加商品信息
+//添加用户信息
 export function add(params) {
-  alert(JSON.stringify(params));
+  // alert(JSON.stringify(params));
   return axios({
-    url: `${baseUrl}/product/add`,
+    url: `${baseUrl}/user/add`,
     method: "POST",
     params: params
   });
@@ -31,10 +31,10 @@ export function edit(params) {
   alert(JSON.stringify(params));
   params.createTime=null;
   params.operateTime=null;
-  params.typeInfo=null;
+  // params.typeInfo=null;
   // params.typeData.
   return axios({
-    url: `${baseUrl}/product/update`,
+    url: `${baseUrl}/user/update`,
     method: "POST",
     params: params
   });
@@ -43,7 +43,7 @@ export function edit(params) {
 //删除信息
 export function remove(params) {
   return axios({
-    url: `${baseUrl}/product/delete/${params}`,
+    url: `${baseUrl}/user/delete/${params}`,
     method: "DELETE"
   });
 }
