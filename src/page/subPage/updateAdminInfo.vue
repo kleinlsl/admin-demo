@@ -2,11 +2,11 @@
   <el-form :model="userForm" :rules="fieldRules" ref="userForm" label-position="left" label-width="0px" class="demo-ruleForm login-container">
 
     <h2 class="title" style="padding-left:22px;" >用户中心</h2>
-    <el-form-item prop="account">
-      <el-input type="text" v-model="userForm.account" readonly="true" auto-complete="off" placeholder="账号"></el-input>
+    <el-form-item prop="adminAccount">
+      <el-input type="text" v-model="userForm.adminAccount" readonly="true" auto-complete="off" placeholder="账号"></el-input>
     </el-form-item>
-    <el-form-item prop="password">
-      <el-input type="password" v-model="userForm.password" auto-complete="off" placeholder="密码"></el-input>
+    <el-form-item prop="adminPass">
+      <el-input type="password" v-model="userForm.adminPass" auto-complete="off" placeholder="密码"></el-input>
     </el-form-item>
     <el-form-item prop="verify_password">
       <el-input type="password" v-model="userForm.verify_password" auto-complete="off" placeholder="重复密码"></el-input>
@@ -21,23 +21,23 @@
 
 <script>
   // import Cookies from "js-cookie"
-  import {edit} from '../../api/api'
+  import {edit,getAdmin} from '../../api/api'
   export default {
     name: 'updateAdminInfo',
     data() {
       return {
         loading: false,
         userForm: {
-          account: sessionStorage.getItem('user'),
-          password: '',
+          adminAccount: sessionStorage.getItem('user'),
+          adminPass: '',
           verify_password:'',
           src: ''
         },
         fieldRules: {
-          account: [
+          adminAccount: [
             { required: true, message: '请输入账号', trigger: 'blur' }
           ],
-          password: [
+          adminPass: [
             { required: true, message: '请输入密码', trigger: 'blur' }
           ],
           verify_password: [
@@ -50,9 +50,10 @@
     methods: {
       editSubmit() {
         this.loading = true;
-        if (this.userForm.password===this.userForm.verify_password){
-            let userInfo = {adminAccount:this.userForm.account, adminPass:this.userForm.password}
-            edit(userInfo).then((res) => {
+        alert(JSON.stringify(this.userForm));
+        if (this.userForm.adminPass===this.userForm.verify_password){
+            // let userInfo = {adminAccount:this.userForm.adminAccount, adminPass:this.userForm.adminPass}
+            edit(this.userForm).then((res) => {
               if(res.data.code !== 0) {
                 this.$message({
                   message: res.data.message,
@@ -64,7 +65,7 @@
                 this.$message({
                   message: "successfully change password! ! !",
                   type: 'success'
-                })
+                });
                 this.$router.push('/')  // 登录成功，跳转到主页
               }
               this.loading = false
@@ -87,6 +88,22 @@
       reset() {
         this.$refs.userForm.resetFields()
       }
+
+    },
+    mounted() {
+
+      this.userForm.adminAccount=sessionStorage.getItem('user');
+
+      let parms = {
+        adminAccount:this.userForm.adminAccount
+      };
+      // alert(parms);
+      getAdmin(parms).then((res) => {
+        if(res.data.code === 0) {
+          this.userForm=res.data.data;
+          // alert(JSON.stringify(this.userForm));
+        }
+      });
 
     }
 

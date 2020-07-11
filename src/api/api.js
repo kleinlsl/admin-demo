@@ -3,7 +3,7 @@
 */
 import axios from "axios";
 //后台地址和端口
-export let baseUrl = "http://localhost:8080/aomaomanage";
+export let baseUrl = "http://39.99.140.59:8000/aomaomanage";
 
 //登录信息
 export function login(params) {
@@ -17,11 +17,23 @@ export function login(params) {
 
 //修改管理员信息
 export function edit(params) {
-  alert(JSON.stringify(params));
+  // alert(JSON.stringify(params));
   params.createTime=null;
   params.operateTime=null;
   return axios({
     url: `${baseUrl}/admin/update`,
+    method: "POST",
+    params: params
+  });
+}
+
+//修改管理员信息
+export function getAdmin(params) {
+  // alert(JSON.stringify(params));
+  // params.createTime=null;
+  // params.operateTime=null;
+  return axios({
+    url: `${baseUrl}/admin/getAdmin`,
     method: "POST",
     params: params
   });

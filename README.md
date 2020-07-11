@@ -2,11 +2,18 @@
 
 > AomaoManagementSystem-View
 >
-> Corresponding server warehouse address：[https://gitee.com/kleinlsl/aomaomanage](https://gitee.com/kleinlsl/aomaomanage)
+> Corresponding server warehouse address：
+```angular2
+    https://gitee.com/kleinlsl/aomaomanage
+or
+    https://github.com/kleinlsl/aomaomanage
+```
 ## clone
 ``` bash
 # clone warehouse
 $ git clone https://gitee.com/kleinlsl/admin-demo.git
+or
+$ git clone https://github.com/kleinlsl/admin-demo.git
 ```
 ## Configuration
 ``` bash
